@@ -16,9 +16,9 @@ function dd($var){
 // Figure out if we have already set up our database tables.  If not, do that now.
 $db = DB::getInstance();
 if ($db->db_exists()){
-    echo('database exists');
+    // Do nothing.
 } else {
-    echo('database is not set up.');
+    // Set up the database and testing data.
     $db->initialize();
 }
 
