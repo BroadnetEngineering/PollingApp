@@ -47,12 +47,15 @@ class PollOption
     }
 
     public function save(){
-        $query = $this->db->prepare('INSERT INTO poll_options (poll_id, option) VALUES (:poll_id, :option)');
-        return $query->execute([':poll_id' => $this->poll_id, ':option' => $this->option ]);
+        $query = $this->db->prepare('INSERT INTO poll_options (`poll_id`, `option`) VALUES (:poll_id, :option)');
+        $query->execute([':poll_id' => $this->poll_id, ':option' => $this->option ]);
+        $new_id = $this->db->lastInsertId();
+        $this->load($new_id);
+        return $this;
     }
 
     public function update(){
-        $query = $this->db->prepare('UPDATE poll_options (poll_id, option) VALUES (:poll_id, :option) WHERE id=:id');
+        $query = $this->db->prepare('UPDATE poll_options (`poll_id`, `option`) VALUES (:poll_id, :option) WHERE id=:id');
         return $query->execute([':poll_id' => $this->poll_id, ':option' => $this->option ]);
     }
 

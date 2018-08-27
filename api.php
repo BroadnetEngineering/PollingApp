@@ -6,8 +6,6 @@ require __DIR__.'/vendor/autoload.php';
 // Load the environment variables
 $dotenv = new \Dotenv\Dotenv(__DIR__);
 $dotenv->load();
-$db = DB::getInstance();
-
 
 // Ok, to get around writing an entire routing system in PHP and using a whole bunch of different templates,
 // the strategy here is to just make a simple interface for our objects and do all the UI in Javascript.
@@ -54,38 +52,54 @@ switch ($request['object']){
                 header('Content-Type: application/json');
                 echo json_encode($all_polls);
                 break;
+            case 'chart_results':
+                $poll = new Poll($request['poll_id']);
+                header('Content-Type: application/json');
+                echo $poll->chart_results();
+                break;
             default:
-                throw new \Exception('no method specified');
+                throw new \Exception('no action specified');
                 break;
         }
         break;
     case 'poll_option':
         switch($request['action']){
             case 'create':
-                break;
-            case 'read':
-                break;
-            case 'update':
+                $new_option = new PollOption;
+                $new_option->poll_id = $request['new_option_poll_id'];
+                $new_option->option = $request['new_option'];
+                $new_option = $new_option->save();
+                header('Content-Type: application/json');
+                echo json_encode($new_option);
                 break;
             case 'delete':
+                $option = new PollOption($request['poll_option_id']);
+                $option->delete();
+                return true;
                 break;
             default:
-                throw new \Exception('no method specified');
+                throw new \Exception('no action specified');
                 break;
         }
         break;
     case 'answer':
         switch($request['action']){
             case 'create':
-                break;
-            case 'read':
-                break;
-            case 'update':
+                $new_answer = new Answer;
+                $new_answer->poll_id = $request['poll_id'];
+                $new_answer->option_id = $request['options'];
+                $new_answer->save();
+                return true;
                 break;
             case 'delete':
+                $answer = new Answer($request['answer_id']);
+                $poll_id = $answer->poll_id;
+                $answer->delete();
+                header('Content-Type: application/json');
+                echo json_encode(['poll_id' => $poll_id]);
                 break;
             default:
-                throw new \Exception('no method specified');
+                throw new \Exception('no action specified');
                 break;
         }
         break;
