@@ -28,7 +28,7 @@ It uses cookies to store info about which polls you have answered, and which of 
 ## Installation
 I'm using composer for class autoloading and a few helpers.  I'm using PHP 7.2 in my development environment, but I don't think it'll having any problem running on 5.6 if that's what you're used to.
 
-* Clone the repo into your web directory of choice.
+* Clone the repo into your web directory of choice. Checkout the `Ian_Monroe` branch if you need to.
 * Make sure you have an empty MySQL database set up someplace and you know the credentials.
 * Copy the `.env.example` file to `.env` in the root of the project
 * Edit your `.env` file to reflect your MySQL credentials.
@@ -38,10 +38,12 @@ I'm using composer for class autoloading and a few helpers.  I'm using PHP 7.2 i
 
 ### Caveats, etc.
 
-The requirement of no frameworks slowed me down considerably.  Had that not been a requirement, I could have done the same work in half the time, and it would have been far more robust.  This is far from production-ready code.
+The requirement of no frameworks slowed me down considerably.  Had that not been a requirement, I could have done the same work in half the time, and it would have been far more full-featured.  This is far from production-ready code.
 
 * There's no CSFR protection, though it should be pretty resistant to sql injection
 * It's not particularly DRY code.
 * There's no tests
 * There's no validation on the forms.
+* The cookie-based system for preventing multiple votes isn't particularly robust; I had aspirations of building something a little fancier. To that end, the DB stores information about the IP address and user agent for each vote, even though it's not getting used for anything.  Something for future development, I guess.
+
 
