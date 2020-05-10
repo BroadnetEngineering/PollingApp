@@ -1,14 +1,7 @@
-# Polling App
-Design a polling application.
+This is a web app that allows the user to take, create, edit, and delete polls.
 
-### Your application should accomplish the following:
-* Able to create, read, update, and delete polls
-* Show all available polls to take
-* Count a poll taker only once, and allow them to update their answer (within reason, you shouldn't create an account system, think of another way to track a user)
-* Show poll results to user after taking the poll
+The front end is built with React and the webserver will start on localhost:3000 with npm start.
 
-### The app should follow these rules:
-* You may use the language of your choice.
-* The frontend portion of your app is entirely freeform.
-* If you use MySQL or similar, you must provide a SQL script to create the schema as part of your pull request.
-* No existing server-side MVC frameworks
+The back end API is built with express and will start on localhost:4000 with npm start.
+
+The database is a locally hosted MySQL database. The backend folder contains the MySQL query to create the database schema.
