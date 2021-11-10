@@ -11,4 +11,3 @@ Design a polling application.
 * You may use the language of your choice.
 * The frontend portion of your app is entirely freeform.
 * If you use MySQL or similar, you must provide a SQL script to create the schema as part of your pull request.
-* No existing server-side MVC frameworks
